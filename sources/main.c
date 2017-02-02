@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: oabdalha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/28 12:30:12 by oabdalha          #+#    #+#             */
-/*   Updated: 2017/02/01 20:54:17 by oabdalha         ###   ########.fr       */
+/*   Created: 2017/01/30 18:12:45 by oabdalha          #+#    #+#             */
+/*   Updated: 2017/02/01 23:15:47 by tzior            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-char	*ft_read_std(int fd)
+char	*read_inputs(int fd)
 {
 	char	buf[BUF_SIZE + 1];
 	int		ret;
@@ -41,7 +41,7 @@ char	*ft_read_std(int fd)
 	return (res);
 }
 
-char	***ft_fill_grid(int ac, char **av)
+char	***insert_ingrid(int ac, char **av)
 {
 	int		i;
 	int		fd;
@@ -52,8 +52,8 @@ char	***ft_fill_grid(int ac, char **av)
 	i = 1;
 	if (ac == 1)
 	{
-		str = ft_read_std(0);
-		*grid_ptr = ft_split_nl(str);
+		str = read_inputs(0);
+		*grid_ptr = divytable(str);
 		if (str)
 			free(str);
 		grid_ptr[1] = NULL;
@@ -61,8 +61,8 @@ char	***ft_fill_grid(int ac, char **av)
 	while (i < ac)
 	{
 		fd = open(av[i], O_RDONLY);
-		str = ft_read_std(fd);
-		grid_ptr[i - 1] = ft_split_nl(str);
+		str = read_inputs(fd);
+		grid_ptr[i - 1] = divytable(str);
 		grid_ptr[i] = NULL;
 		i++;
 	}
@@ -75,11 +75,11 @@ int		main(int ac, char **av)
 	int		j;
 	char	***grid_ptr;
 
-	grid_ptr = ft_fill_grid(ac, av);
+	grid_ptr = insert_ingrid(ac, av);
 	i = 0;
 	while (grid_ptr[i])
 	{
-		if (ft_bsq(grid_ptr[i]))
+		if (biggestsq(grid_ptr[i]))
 			ft_putstr("map error\n");
 		j = 0;
 		while (grid_ptr[i][j])

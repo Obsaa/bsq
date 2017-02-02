@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: oabdalha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/28 12:59:02 by oabdalha          #+#    #+#             */
-/*   Updated: 2017/02/01 20:53:55 by oabdalha         ###   ########.fr       */
+/*   Created: 2017/01/28 20:12:31 by oabdalha          #+#    #+#             */
+/*   Updated: 2017/02/01 23:17:19 by tzior            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef HEADER_H
 # define HEADER_H
@@ -34,15 +33,15 @@ typedef struct	s_square
 	int	size;
 }				t_square;
 
-int				ft_bsq(char **grid);
-char			**ft_split_nl(char *str);
+int				biggestsq(char **grid);
+char			**divytable(char *str);
 
 void			ft_putchar(char c);
 void			ft_putstr(char *str);
-void			ft_print_grid(char **grid);
-void			ft_print_sol(char **grid, t_square sol, char x);
+void			print_map(char **grid);
+void			print_solution(char **grid, t_square sol, char x);
 
-int				min(int a, int b, int c);
+int				low(int a, int b, int c);
 
 int				ft_strlen(char *str);
 char			*ft_strdup(char *src);
